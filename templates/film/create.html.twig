@@ -4,29 +4,29 @@
 
 {% block body %}
 
-<div>
+<h1 class="h1_create">
     {% if (isEditor) %}
         Formulaire de modification d'un film
     {% else %}
         Formulaire d'ajout de film
     {% endif %}
-</div>
+</h1>
 
 {{ form_start(form) }}
-<div>
-    {{ form_row(form.title, {'label': 'Titre : '})}}
+<div class="create_input">
+    {{ form_row(form.title, {'label': 'Titre'})}}
 </div>
-<div>
-    {{ form_row(form.realisateur, {'label': 'Réalisateur : '})}}
+<div class="create_input">
+    {{ form_row(form.realisateur, {'label': 'Réalisateur'})}}
 </div>
-<div>
-    {{ form_row(form.genre, {'label': 'Genre : '})}}
+<div class="create_input">
+    {{ form_row(form.genre, {'label': 'Genre'})}}
 </div>
-<div>
+<div class="create_btn">
     {% if (isEditor) %}
-        {{ form_row(form.save, { 'label' : 'Edit'}) }}
+        {{ form_row(form.save, { 'label' : 'Modifier', 'attr': {'class': 'btn_create'}}) }}
     {% else %}
-        {{ form_row(form.save, { 'label' : 'Save'}) }}
+        {{ form_row(form.save, { 'label' : 'Ajouter'}) }}
     {% endif %}
 </div>
 {{ form_end(form) }}
