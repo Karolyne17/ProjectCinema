@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 
 class FilmController extends AbstractController
 {
@@ -18,27 +21,84 @@ class FilmController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/filmCreate", name="filmCreate")
+     * @Route("/filmUpdate/{id}", name="filmUpdate")
      */
-    public function createFilm(ManagerRegistry $doctrine): Response
+    public function addFilm(Request $request, ManagerRegistry $doctrine, $id = null)
     {
-        $entityManager = $doctrine->getManager();
+       $entityManager = $doctrine->getManager();
 
-        $film = new Film;
-        $film->setTitle("Les dents de la mer");
-        $film->setRealisateur("Steven Spielberg");
-        $film->setGenre("Horreur");
+       $isEditor = false;
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($film);
+        if(isset($id))
+        {
+            $film = $doctrine->getRepository(Film::class)->find($id);
+            if(!isset($id))
+            { 
+                return $this->redirectToRoute('filmList');
+            }
+            $isEditor = true;
+        }
+        else
+        {
+            $film = new Film;
+        }
+     
+        $form = $this->createFormBuilder($film)
+            ->add("title", TextType::class, ['label' => 'Titre : '])
+            ->add("realisateur", TextType::class, ['label' => 'Réalisateur : '])
+            ->add("genre", TextType::class, ['label' => 'Genre : '])
+            ->add("save", SubmitType::class, ['label' => 'Créer le film'])
+            ->getForm();
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+        $form->handleRequest($request);
 
-        return new Response('Enregistrement du nouveau film : '.$film->getTitle());
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            
+            $film = $form->getData();
+
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($film);
+            $entityManager->flush();
+
+    
+            // ... perform some action, such as saving the task to the database
+    
+            return $this->redirectToRoute('filmList');
+        }
+
+        return $this->render('film/create.html.twig', [
+            'form' => $form->createView(),
+            'isEditor'=> $isEditor
+        ]);
+        
     }
 
+
+    /**
+     * @Route("/filmDelete/{id}", name="filmDelete")
+     */
+    public function delete(ManagerRegistry $doctrine, $id)
+    {
+
+        $entityManager = $doctrine->getManager();
+
+        $film = $entityManager->getRepository(Film::class)->find($id);
+
+        if(isset($film))
+        {
+            $entityManager->remove($film);
+            $entityManager->flush();
+
+        }
+            return $this->redirectToRoute('filmList');
+           
+    }
 
 
     /**
@@ -46,15 +106,10 @@ class FilmController extends AbstractController
      */
     public function show(ManagerRegistry $doctrine)
     {
-        $film = $doctrine->getManager()->getRepository(Film::class)->findAll();
 
-        if (empty($film)) {
-            throw $this->createNotFoundException(
-                'Aucun film trouvé '.$id
-            );
-        }
+        $films = $doctrine->getManager()->getRepository(Film::class)->findAll();
 
-        return $this->render('navigation/films.html.twig', ["films" => $film]);
+        return $this->render('film/listing.html.twig', ["films" => $films]);
 
         // or render a template
         // in the template, print things with {{ product.name }}
@@ -62,25 +117,28 @@ class FilmController extends AbstractController
     }
 
 
-        /**
-     * @Route("/filmUpdate", name="filmUpdate")
+    /**
+     * @Route("/filmDetail/{id}", name="filmDetail")
      */
-    public function update(ManagerRegistry $doctrine, int $id): Response
-    {
-        $entityManager = $doctrine->getManager();
-        $product = $entityManager->getRepository(Product::class)->find($id);
 
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
+    public function detail(ManagerRegistry $doctrine, $id)
+    {
+
+        $entityManager = $doctrine->getManager();
+
+        $film = $entityManager->getRepository(Film::class)->find($id);
+
+        if(!isset($id))
+        { 
+            return $this->redirectToRoute('filmList');
+            // return $this->redirectToRoute('filmList', ["message" => "Erreur aucun film trouvé"]);
         }
 
-        $product->setName('New product name!');
-        $entityManager->flush();
+        return $this->render('film/detail.html.twig', ["film" => $film]);
 
-        return $this->redirectToRoute('product_show', [
-            'id' => $product->getId() 
-        ]);
+       
+
     }
+
+
 }

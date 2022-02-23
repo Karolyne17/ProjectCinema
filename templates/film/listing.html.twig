@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block tittle %}Films{% endblock %}
+
+{% block body %}
+
+<h1 class="h1_listing"> Liste De Tous Nos Films </h1>
+
+    {% if films|length == 0 %}
+        Pas de films disponible
+    {% endif %}
+
+    <div>
+        <ul id="header_ul_listing" class="ul_listing">
+            <li class="li_listing">Titre</li>
+            <li class="li_listing">Réalisateur</li>
+            <li class="li_listing">Genre</li>
+            <li class="li_listing">Edition</li>
+        </ul>
+    </div>
+    <div class="container_listing">
+        {% for film in films %}
+        <ul class="ul_listing">
+            <li class="li_listing">{{ film.title }}</li>
+            <li class="li_listing">{{ film.realisateur }}</li>
+            <li class="li_listing">{{ film.genre }}</li>
+            
+            <a class="listing_btn" href="{{ path('filmDetail', { 'id': film.id} ) }}">Détails</a>
+            <a class="listing_btn" href="{{ path('filmUpdate', { 'id': film.id} ) }}">Editer</a>
+            <a class="listing_btn" href="{{ path('filmDelete', { 'id': film.id} ) }}">Supprimer</a>
+        </ul>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

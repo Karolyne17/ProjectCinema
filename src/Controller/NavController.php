@@ -17,20 +17,7 @@ class NavController extends AbstractController
         return $this->render("navigation/accueil.html.twig");
     }
 
-    /**
-    * @Route("/films",name="films")
-    */
-     public function films()
-     {
-        $pageTittle = "Films";
 
-        $films = [
-        "Les Dents De La mer",
-        "Fast ans Furious",
-        "Spiderman"
-    ];
-        return $this->render("navigation/films.html.twig", ["films" => $films]);
-    }
 
         /**
     * @Route("/redirect",name="redirect")

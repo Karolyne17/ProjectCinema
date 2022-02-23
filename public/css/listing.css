@@ -1,0 +1,54 @@
+.h1_listing
+{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#header_ul_listing
+{
+    margin-top:50px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.container_listing
+{
+    border:1px solid gray;
+}
+
+.ul_listing
+{
+    display: flex;
+    justify-content: center;
+    padding-left:0;
+}
+
+.li_listing
+{
+    padding:20px;
+    list-style-type: none; 
+    text-align: center;
+    width:25%;
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.listing_btn
+{
+    border:2px solid cornflowerblue;
+    font-size: 1.18rem;
+    font-family: Arial, Helvetica, sans-serif;
+    width:8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration:none;
+    color:cornflowerblue;
+    margin:5px;
+}
+
+.listing_btn:hover
+{
+    border:2px solid black;
+    color:black;
+}

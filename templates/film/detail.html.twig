@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block tittle %}Films{% endblock %}
+
+{% block body %}
+
+<h1 class="h1_listing"> Détail Du Film {{ film.title }} </h1>
+
+
+    <div>
+      Titre du film : {{ film.title }}
+    </div>
+        <div>
+      Réalisateur du film : {{ film.realisateur }}
+    </div>
+    <div>
+      Genre du film : {{ film.genre }}
+    </div>
+
+    <div>
+        <a class="listing_btn" href="{{ path('filmUpdate', { 'id': film.id} ) }}">Editer</a>
+        <a class="listing_btn" href="{{ path('filmDelete', { 'id': film.id} ) }}">Supprimer</a>
+    </div>
+    
+{% endblock %}
