@@ -1,0 +1,35 @@
+.detail_container
+{
+    text-align: center;
+    padding:40px;
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.detail_btn
+{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+
+.detail_btn a
+{
+    border:2px solid cornflowerblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration:none;
+    color:cornflowerblue;
+    margin:5px;
+    background-color: white;
+    padding:15px;
+}
+
+.detail_btn a:hover
+{
+    border:2px solid black;
+    color:black;
+}

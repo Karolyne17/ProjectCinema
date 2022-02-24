@@ -6,20 +6,21 @@
 
 <h1 class="h1_listing"> Détail Du Film {{ film.title }} </h1>
 
+  <div class="detail_container">
+    <div>
+      <span>Titre du film</span> {{ film.title }}
+    </div>
+    <div>
+      <span>Réalisateur du film</span> {{ film.realisateur }}
+    </div>
+    <div>
+      <span>Genre du film</span> {{ film.genre }}
+    </div>
 
-    <div>
-      Titre du film : {{ film.title }}
+    <div class="detail_btn">
+        <a href="{{ path('filmUpdate', { 'id': film.id} ) }}">Editer</a>
+        <a href="{{ path('filmDelete', { 'id': film.id} ) }}">Supprimer</a>
     </div>
-        <div>
-      Réalisateur du film : {{ film.realisateur }}
-    </div>
-    <div>
-      Genre du film : {{ film.genre }}
-    </div>
-
-    <div>
-        <a class="listing_btn" href="{{ path('filmUpdate', { 'id': film.id} ) }}">Editer</a>
-        <a class="listing_btn" href="{{ path('filmDelete', { 'id': film.id} ) }}">Supprimer</a>
-    </div>
+  </div>
     
 {% endblock %}

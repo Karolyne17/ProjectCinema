@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Film;
+use App\Form\FilmCreateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class FilmController extends AbstractController
 {
@@ -27,42 +28,31 @@ class FilmController extends AbstractController
      * @Route("/filmCreate", name="filmCreate")
      * @Route("/filmUpdate/{id}", name="filmUpdate")
      */
-    public function addFilm(Request $request, ManagerRegistry $doctrine, $id = null)
+    public function addFilm(Request $request, ManagerRegistry $doctrine, Film $film = null, ValidatorInterface $validator)
     {
        $entityManager = $doctrine->getManager();
 
-       $isEditor = false;
-
-        if(isset($id))
-        {
-            $film = $doctrine->getRepository(Film::class)->find($id);
-            if(!isset($id))
-            { 
-                return $this->redirectToRoute('filmList');
-            }
-            $isEditor = true;
-        }
-        else
+        if(!$film)
         {
             $film = new Film;
         }
      
-        $form = $this->createFormBuilder($film)
-            ->add("title", TextType::class, ['label' => 'Titre : '])
-            ->add("realisateur", TextType::class, ['label' => 'Réalisateur : '])
-            ->add("genre", TextType::class, ['label' => 'Genre : '])
-            ->add("save", SubmitType::class, ['label' => 'Créer le film'])
-            ->getForm();
-
+        $form = $this->createForm(FilmCreateType::class, $film);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             
+            if(!$film->getId())
+            {
+                $film->setCreatedAt(new \DateTimeImmutable('now'));
+            }
+
+            $film->setUpdatedAt(new \DateTime('now'));
+
             $film = $form->getData();
 
-            $entityManager = $doctrine->getManager();
             $entityManager->persist($film);
             $entityManager->flush();
 
@@ -72,9 +62,12 @@ class FilmController extends AbstractController
             return $this->redirectToRoute('filmList');
         }
 
+        $errors = $validator->validate($film);
+
         return $this->render('film/create.html.twig', [
             'form' => $form->createView(),
-            'isEditor'=> $isEditor
+            'isEditor'=> $film->getId(),
+            'errors' => $errors
         ]);
         
     }

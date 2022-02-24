@@ -22,12 +22,22 @@
 <div class="create_input">
     {{ form_row(form.genre, {'label': 'Genre'})}}
 </div>
+<div class="create_input">
+    {{ form_row(form.duree, {'label': 'Durée en minutes'})}}
+</div>
+<div class="create_input">
+    {{ form_row(form.status, {'label': 'Status'})}}
+</div>
 <div class="create_btn">
     {% if (isEditor) %}
         {{ form_row(form.save, { 'label' : 'Modifier', 'attr': {'class': 'btn_create'}}) }}
     {% else %}
         {{ form_row(form.save, { 'label' : 'Ajouter'}) }}
     {% endif %}
+
+    {% for error in errors %}
+        <li> {{ error.message }} </li>
+    {% endfor %}
 </div>
 {{ form_end(form) }}
 
