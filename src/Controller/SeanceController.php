@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Seance;
 use App\Form\SeanceType;
+use App\Repository\FilmRepository;
 use App\Repository\SeanceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,10 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class SeanceController extends AbstractController
 {
     #[Route('/', name: 'seance_index', methods: ['GET'])]
-    public function index(SeanceRepository $seanceRepository): Response
+    public function index(SeanceRepository $seanceRepository, FilmRepository $filmRepository): Response
     {
         return $this->render('seance/index.html.twig', [
             'seances' => $seanceRepository->findAll(),
+            'film' => $filmRepository->find($id),
         ]);
     }
 

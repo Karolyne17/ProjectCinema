@@ -38,7 +38,7 @@ class Film
     #[ORM\Column(type: 'string', length: 255)]
     private $status;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]

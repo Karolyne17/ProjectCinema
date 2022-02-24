@@ -8,6 +8,9 @@
         <div class="create_input">
             {{ form_row(form.film, {'label': 'Film'})}}
         </div>
+        <div class="create_input">
+            {{ form_row(form.salle, {'label': 'Salle'})}}
+        </div>
 
     <button class="btn_create btn">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}
