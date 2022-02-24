@@ -46,10 +46,11 @@ class FilmController extends AbstractController
             
             if(!$film->getId())
             {
-                $film->setCreatedAt(new \DateTimeImmutable('now'));
+                $film->setCreatedAt(new \DateTime('now'));
             }
 
             $film->setUpdatedAt(new \DateTime('now'));
+            
 
             $film = $form->getData();
 

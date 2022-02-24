@@ -30,6 +30,10 @@ class SeanceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $seance->setCreatedAt(new \DateTime('now'));
+            $seance->setUpdatedAt(new \DateTime('now'));
+
             $entityManager->persist($seance);
             $entityManager->flush();
 
@@ -57,8 +61,9 @@ class SeanceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $seance->setUpdatedAt(new \DateTime('now'));
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('seance_index', [], Response::HTTP_SEE_OTHER);
         }
 
