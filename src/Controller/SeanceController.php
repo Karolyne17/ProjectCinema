@@ -20,7 +20,7 @@ class SeanceController extends AbstractController
     {
         return $this->render('seance/index.html.twig', [
             'seances' => $seanceRepository->findAll(),
-            'film' => $filmRepository->find($id),
+            'films' => $filmRepository->findAll(),
         ]);
     }
 

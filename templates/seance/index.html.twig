@@ -11,15 +11,17 @@
                 <th class="li_listing">Film</th>
                 <th class="li_listing">Date et Heure</th>
                 <th class="li_listing">Version</th>
+                <th class="li_listing">Salle</th>
                 <th class="li_listing">Edition</th>
             </tr>
         </thead>
         <tbody>
         {% for seance in seances %}
             <tr id="header_ul_listing" class="ul_listing">
-                <td class="li_listing">{{ film.title }}</td>
+                <td class="li_listing">{{ seance.getFilm().title}}</td>
                 <td class="li_listing">{{ seance.dateDebut ? seance.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
                 <td class="li_listing">{{ seance.lang }}</td>
+                <td class="li_listing">{{ seance.getSalle().numero}}</td>
                 <td >
                     <a href="{{ path('seance_show', {'id': seance.id}) }}">Detail</a>
                     <a href="{{ path('seance_edit', {'id': seance.id}) }}">Editer</a>
