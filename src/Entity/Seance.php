@@ -21,10 +21,6 @@ class Seance
     #[ORM\Column(type: 'string', length: 255)]
     private $lang;
 
-    #[ORM\ManyToOne(targetEntity: Film::class, inversedBy: 'seances')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $film;
-
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
@@ -33,6 +29,9 @@ class Seance
 
     #[ORM\ManyToOne(targetEntity: Salle::class, inversedBy: 'seances')]
     private $salle;
+
+    #[ORM\ManyToOne(targetEntity: Film::class, inversedBy: 'seances')]
+    private $film;
 
     public function getId(): ?int
     {
@@ -59,18 +58,6 @@ class Seance
     public function setLang(string $lang): self
     {
         $this->lang = $lang;
-
-        return $this;
-    }
-
-    public function getFilm(): ?Film
-    {
-        return $this->film;
-    }
-
-    public function setFilm(?Film $film): self
-    {
-        $this->film = $film;
 
         return $this;
     }
@@ -110,4 +97,17 @@ class Seance
 
         return $this;
     }
+
+    public function getFilm(): ?Film
+    {
+        return $this->film;
+    }
+
+    public function setFilm(?Film $film): self
+    {
+        $this->film = $film;
+
+        return $this;
+    }
+
 }

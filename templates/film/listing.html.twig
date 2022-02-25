@@ -10,6 +10,45 @@
         Pas de films disponible
     {% endif %}
 
+    {% for film in films %}
+
+    <div class="film_div_container">
+        <div class="film_div_img">
+            {{ film.image }}
+        </div>
+        <div class="film_div_presentation">
+            <p class="film_div_titre">{{ film.title }}</p>
+            <div class="film_div_synopsis">
+                {{ film.synopsis }}
+            </div>
+            <div class="film_div_grd">
+                <p class="film_p_grd">Genre :{{ film.genre }}</p>
+                <p class="film_p_grd">Réalisateur : {{ film.realisateur }}</p>
+                <p class="film_p_grd">Durée : {{ film.duree }}</p>
+            </div>
+        </div>
+        <a class="film_div_a_seance" href="{{ path('seance_index', { 'id': film.id} ) }}">
+            <div class="film_div_seance">
+                <p>Voir les prochaines séances</p>
+            </div>
+        </a>
+
+    </div>
+    
+    {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div>
         <ul id="header_ul_listing" class="ul_listing">
             <li class="li_listing">Titre</li>

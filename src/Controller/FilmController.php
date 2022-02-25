@@ -3,14 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Film;
+use App\Entity\Seance;
 use App\Form\FilmCreateType;
+use App\Repository\SeanceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\MakerBundle\Validator;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 
 class FilmController extends AbstractController
 {
@@ -28,7 +33,7 @@ class FilmController extends AbstractController
      * @Route("/filmCreate", name="filmCreate")
      * @Route("/filmUpdate/{id}", name="filmUpdate")
      */
-    public function addFilm(Request $request, ManagerRegistry $doctrine, Film $film = null, ValidatorInterface $validator)
+    public function addFilm(Request $request, ManagerRegistry $doctrine, Film $film = null, ValidatorInterface $validator, SluggerInterface $slugger )
     {
        $entityManager = $doctrine->getManager();
 
@@ -50,7 +55,33 @@ class FilmController extends AbstractController
             }
 
             $film->setUpdatedAt(new \DateTime('now'));
-            
+
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+
+            // this condition is needed because the 'image' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where images are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                }
+                catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'imageFilename' property to store the PDF file name
+                // instead of its contents
+                $film->setImage($newFilename);
+            }
 
             $film = $form->getData();
 
@@ -77,15 +108,22 @@ class FilmController extends AbstractController
     /**
      * @Route("/filmDelete/{id}", name="filmDelete")
      */
-    public function delete(ManagerRegistry $doctrine, $id)
+    public function delete(ManagerRegistry $doctrine, Film $film, SeanceRepository $seance )
     {
 
         $entityManager = $doctrine->getManager();
 
-        $film = $entityManager->getRepository(Film::class)->find($id);
+        $seanceFilms = $seance -> findBy(["film"=>$film]);
 
         if(isset($film))
         {
+            if(isset($seanceFilms)){
+                foreach($seanceFilms as $seanceFilm){
+                    $entityManager->remove($seanceFilm);
+                    $entityManager->flush();
+                }
+                
+            }
             $entityManager->remove($film);
             $entityManager->flush();
 

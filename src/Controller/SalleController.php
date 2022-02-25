@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Salle;
 use App\Form\SalleType;
 use App\Repository\SalleRepository;
+use App\Repository\SeanceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,13 +70,22 @@ class SalleController extends AbstractController
     }
 
     #[Route('/{id}', name: 'salle_delete', methods: ['POST'])]
-    public function delete(Request $request, Salle $salle, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Salle $salle, EntityManagerInterface $entityManager, SeanceRepository $seance): Response
     {
+        $seanceSalles = $seance -> findBy(["salle"=>$salle]);
+
         if ($this->isCsrfTokenValid('delete'.$salle->getId(), $request->request->get('_token'))) {
+            if(isset($seanceSalles)){
+                foreach($seanceSalles as $seanceSalle){
+                    $entityManager->remove($seanceSalle);
+                    $entityManager->flush();
+                }
+
             $entityManager->remove($salle);
             $entityManager->flush();
+            }
         }
-
         return $this->redirectToRoute('salle_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+

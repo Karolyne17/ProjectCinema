@@ -29,9 +29,6 @@ class Film
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $genre;
 
-    #[ORM\OneToMany(mappedBy: 'film', targetEntity: Seance::class)]
-    private $seances;
-
     #[ORM\Column(type: 'integer')]
     private $duree;
 
@@ -43,6 +40,9 @@ class Film
 
     #[ORM\Column(type: 'datetime')]
     private $updatedAt;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
 
     public function __construct()
     {
@@ -86,36 +86,6 @@ class Film
     public function setGenre(?string $genre): self
     {
         $this->genre = $genre;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Seance>
-     */
-    public function getSeances(): Collection
-    {
-        return $this->seances;
-    }
-
-    public function addSeance(Seance $seance): self
-    {
-        if (!$this->seances->contains($seance)) {
-            $this->seances[] = $seance;
-            $seance->setFilm($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSeance(Seance $seance): self
-    {
-        if ($this->seances->removeElement($seance)) {
-            // set the owning side to null (unless already changed)
-            if ($seance->getFilm() === $this) {
-                $seance->setFilm(null);
-            }
-        }
 
         return $this;
     }
@@ -164,6 +134,80 @@ class Film
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    private $imageFilename;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $synopsis;
+
+    #[ORM\OneToMany(mappedBy: 'film', targetEntity: Seance::class)]
+    private $seances;
+
+    public function getImageFilename()
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename($imageFilename)
+    {
+        $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    public function getSynopsis(): ?string
+    {
+        return $this->synopsis;
+    }
+
+    public function setSynopsis(?string $synopsis): self
+    {
+        $this->synopsis = $synopsis;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Seance>
+     */
+    public function getSeances(): Collection
+    {
+        return $this->seances;
+    }
+
+    public function addSeance(Seance $seance): self
+    {
+        if (!$this->seances->contains($seance)) {
+            $this->seances[] = $seance;
+            $seance->setFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSeance(Seance $seance): self
+    {
+        if ($this->seances->removeElement($seance)) {
+            // set the owning side to null (unless already changed)
+            if ($seance->getFilm() === $this) {
+                $seance->setFilm(null);
+            }
+        }
 
         return $this;
     }
