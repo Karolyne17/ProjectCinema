@@ -3,37 +3,43 @@
 {% block title %}Salle index{% endblock %}
 
 {% block body %}
-    <h1>Salle index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Numero</th>
-                <th>Disponibilite</th>
-                <th>NombrePlace</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<h1 class="h1_listing">Nos Salles</h1>
+
+
+    {% if salles|length == 0 %}
+        <div class="message_contenu_inexistant">Aucune Salle Trouvée</div>
+
+        <div class="btn_admin_container">
+         <a href="{{ path ('salle_new') }}"><div class="btn_admin">Ajouter une salle</div></a>
+        </div>
+
+    {% else %}
+    
+
+<div class="film_super_container">
         {% for salle in salles %}
-            <tr>
-                <td>{{ salle.id }}</td>
-                <td>{{ salle.numero }}</td>
-                <td>{{ salle.disponibilite }}</td>
-                <td>{{ salle.nombrePlace }}</td>
-                <td>
-                    <a href="{{ path('salle_show', {'id': salle.id}) }}">show</a>
-                    <a href="{{ path('salle_edit', {'id': salle.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('salle_new') }}">Create new</a>
+        <div class="film_div_container">
+            <div class="film_div_text">
+                <div class="film_div_presentation">
+                    <p class="seance_div_titre">Salle numéro {{ salle.numero }}</p>
+                 
+                    <p class="seance_date">Nombre de place : {{ salle.nombrePlace  }}</p>
+                    <div class="seance_div_grd">
+                        <p class="film_p_grd"> Disponibilite : {{ salle.disponibilite }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="admin_btn_container">
+                <a href="{{ path('salle_edit', {'id': salle.id}) }}"><div class="seance_update_btn">Modifier</div></a>
+                <div>{{ include('salle/_delete_form.html.twig') }}</div>
+            </div>
+        </div>
+        
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
 {% endblock %}

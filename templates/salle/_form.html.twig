@@ -1,4 +1,15 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+        <div class="create_input">
+        {{ form_row(form.numero, {'label': 'Numéro'})}}
+        </div>
+                <div class="create_input">
+            {{ form_row(form.disponibilite, {'label': 'Disponibilité'})}}
+        </div>
+        <div class="create_input">
+            {{ form_row(form.nombrePlace, {'label': 'Nombre De Place'})}}
+        </div>
+
+    <div class="create_btn">
+        <button class="btn_create btn">{{ button_label|default('Ajouter') }}</button>
+    </div>
 {{ form_end(form) }}

@@ -143,9 +143,6 @@ class FilmController extends AbstractController
 
         return $this->render('film/listing.html.twig', ["films" => $films]);
 
-        // or render a template
-        // in the template, print things with {{ product.name }}
-        // return $this->render('product/show.html.twig', ['product' => $product]);
     }
 
 
@@ -153,12 +150,13 @@ class FilmController extends AbstractController
      * @Route("/filmDetail/{id}", name="filmDetail")
      */
 
-    public function detail(ManagerRegistry $doctrine, $id)
+    public function detail(ManagerRegistry $doctrine, $id, SeanceRepository $seance)
     {
 
         $entityManager = $doctrine->getManager();
 
         $film = $entityManager->getRepository(Film::class)->find($id);
+        $seance = $entityManager->getRepository(Seance::class)->find($id);
 
         if(!isset($id))
         { 
@@ -166,7 +164,7 @@ class FilmController extends AbstractController
             // return $this->redirectToRoute('filmList', ["message" => "Erreur aucun film trouvé"]);
         }
 
-        return $this->render('film/detail.html.twig', ["film" => $film]);
+        return $this->render('film/detail.html.twig', ["film" => $film, "seance" =>$seance]);
 
        
 

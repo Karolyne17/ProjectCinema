@@ -7,15 +7,20 @@
 <h1 class="h1_listing"> Liste De Tous Nos Films </h1>
 
     {% if films|length == 0 %}
-        Pas de films disponible
-    {% endif %}
+        <div class="message_contenu_inexistant">Pas de films disponibles</div>
+
+        <div class="btn_admin_container">
+         <a href="{{ path ('filmCreate') }}"><div class="btn_admin">Ajouter un film</div></a>
+        </div>
+
+    {% else %}
 
     <div class="film_super_container">
         {% for film in films %}
 
         <div class="film_div_container">
             <div class="film_div_img">
-                <img src="uploads\images\{{film.image}}" alt="Affiche Film">
+                <img src="\uploads\images\{{film.image}}" alt="Affiche Film">
             </div>
             <div class="film_div_text">
                 <div class="film_div_presentation">
@@ -39,5 +44,8 @@
         
         {% endfor %}
     </div>
+
+    
+    {% endif %}
     
 {% endblock %}

@@ -6,8 +6,12 @@ use App\Repository\SalleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Bundle\MakerBundle\Validator;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SalleRepository::class)]
+#[UniqueEntity('numero')]
 class Salle
 {
     #[ORM\Id]
@@ -15,8 +19,8 @@ class Salle
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $numero;
+    #[ORM\Column (name: 'numero', type: 'integer', unique: true)]
+    protected $numero;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $disponibilite;
@@ -26,6 +30,7 @@ class Salle
 
     #[ORM\OneToMany(mappedBy: 'salle', targetEntity: Seance::class)]
     private $seances;
+
 
     public function __construct()
     {

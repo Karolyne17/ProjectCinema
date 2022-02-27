@@ -4,7 +4,7 @@
     margin:40px;
     color :antiquewhite;
     font-family: Arial, Helvetica, sans-serif;
-    width:40%;
+    width:55%;
     display:block;
     box-shadow: 5px 2px 4px #0a0a0a;
 }
@@ -12,6 +12,15 @@
 .detail_film_div_titre{
     font-weight: bold;
     font-size: 1.5rem;
+}
+
+.detail_div_img{
+    text-align: center;
+}
+
+.detail_div_img img{
+    max-height: 400px;
+    max-width: 100%;
 }
 
 .detail_film_div_synopsis{
@@ -23,11 +32,49 @@
     padding-top:20px;
     font-size: 1.1rem;
     color :#c1c1c1;
+    padding-bottom: 30px;
 }
 
 .detail_film_div_grd p{
     margin:auto;
     line-height: 3.5ch;
+}
+
+.film_detail_super_container{
+    display: flex;
+}
+
+.seance_detail_div_container{
+    background-color: #5e5e5e;
+    margin:40px;
+    color :antiquewhite;
+    font-family: Arial, Helvetica, sans-serif;
+    width:30%;
+    display:block;
+    box-shadow: 5px 2px 4px #0a0a0a;
+}
+
+.seance_detail_div_titre{
+    padding:20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.message_contenu_manquant{
+    text-align: center;
+    padding: 15px;
+    background-color: #0a0a0a;
+    margin-top: 50%;
+    font-size: 1.4rem;
+}
+
+.message_contenu_inexistant{
+    text-align: center;
+    padding: 15px;
+    background-color: #0a0a0a;
+    margin-top: 100px;
+    font-size: 1.4rem;
 }
 
 

@@ -6,12 +6,23 @@
     <h1 class="h1_listing">Nos Séances</h1>
 
 
+    {% if seances|length == 0 %}
+        <div class="message_contenu_inexistant">Pas de séances disponible</div>
 
+        <div class="btn_admin_container">
+         <a href="{{ path ('seance_new') }}"><div class="btn_admin">Ajouter une séance</div></a>
+        </div>
+
+    {% else %}
+    
 
 <div class="film_super_container">
         {% for seance in seances %}
 
         <div class="film_div_container">
+        <div class="film_div_img">
+                <img src="\uploads\images\{{seance.getFilm().image}}" alt="Affiche Film">
+            </div>
             <div class="film_div_text">
                 <div class="film_div_presentation">
                     <p class="seance_div_titre">{{ seance.getFilm().title }}</p>
@@ -35,5 +46,7 @@
         
         {% endfor %}
     </div>
+
+    {% endif %}
 
 {% endblock %}

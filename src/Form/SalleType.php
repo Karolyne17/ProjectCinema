@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Salle;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class SalleType extends AbstractType
 {
@@ -13,7 +15,7 @@ class SalleType extends AbstractType
     {
         $builder
             ->add('numero')
-            ->add('disponibilite')
+            ->add('disponibilite', ChoiceType::class,["choices" => ['Disponible' => 'Disponible', 'En Travaux' => 'En Travaux',],])
             ->add('nombrePlace')
         ;
     }

@@ -13,8 +13,7 @@ class NavController extends AbstractController
     */
     public function accueil()
     {
-        $pageTittle = "Accueil";
-        return $this->render("navigation/accueil.html.twig");
+        return $this->redirectToRoute('filmList');
     }
 
 
