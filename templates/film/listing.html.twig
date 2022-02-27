@@ -10,68 +10,33 @@
         Pas de films disponible
     {% endif %}
 
-    {% for film in films %}
-
-    <div class="film_div_container">
-        <div class="film_div_img">
-            {{ film.image }}
-        </div>
-        <div class="film_div_presentation">
-            <p class="film_div_titre">{{ film.title }}</p>
-            <div class="film_div_synopsis">
-                {{ film.synopsis }}
-            </div>
-            <div class="film_div_grd">
-                <p class="film_p_grd">Genre :{{ film.genre }}</p>
-                <p class="film_p_grd">Réalisateur : {{ film.realisateur }}</p>
-                <p class="film_p_grd">Durée : {{ film.duree }}</p>
-            </div>
-        </div>
-        <a class="film_div_a_seance" href="{{ path('seance_index', { 'id': film.id} ) }}">
-            <div class="film_div_seance">
-                <p>Voir les prochaines séances</p>
-            </div>
-        </a>
-
-    </div>
-    
-    {% endfor %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div>
-        <ul id="header_ul_listing" class="ul_listing">
-            <li class="li_listing">Titre</li>
-            <li class="li_listing">Réalisateur</li>
-            <li class="li_listing">Genre</li>
-            <li class="li_listing">Durée</li>
-            <li class="li_listing">Statut</li>
-            <li class="li_listing">Edition</li>
-        </ul>
-    </div>
-    <div class="container_listing">
+    <div class="film_super_container">
         {% for film in films %}
-        <ul class="ul_listing">
-            <li class="li_listing">{{ film.title }}</li>
-            <li class="li_listing">{{ film.realisateur }}</li>
-            <li class="li_listing">{{ film.genre }}</li>
-            <li class="li_listing">{{ film.duree }}</li>
-            <li class="li_listing">{{ film.status }}</li>
-            
-            <a class="listing_btn" href="{{ path('filmDetail', { 'id': film.id} ) }}">Détails</a>
-            <a class="listing_btn" href="{{ path('filmUpdate', { 'id': film.id} ) }}">Editer</a>
-            <a class="listing_btn" href="{{ path('filmDelete', { 'id': film.id} ) }}">Supprimer</a>
-        </ul>
+
+        <div class="film_div_container">
+            <div class="film_div_img">
+                <img src="uploads\images\{{film.image}}" alt="Affiche Film">
+            </div>
+            <div class="film_div_text">
+                <div class="film_div_presentation">
+                    <p class="film_div_titre">{{ film.title }}</p>
+                    <div class="film_div_synopsis">
+                    {{ film.synopsis|length > 160 ? film.synopsis|slice(0, 160) ~ '...' : film.synopsis  }}
+                    </div>
+                    <div class="film_div_grd">
+                        <p class="film_p_grd">{{ film.genre }}</p>
+                        <p class="film_p_grd">{{ film.realisateur }}</p>
+                        <p class="film_p_grd">{{ film.duree }} Minutes</p>
+                    </div>
+                </div>
+                <a class="film_div_a_info" href="{{ path('filmDetail', { 'id': film.id} ) }}">
+                    <div class="film_div_info">
+                        <p>Plus d'informations</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
         {% endfor %}
     </div>
     

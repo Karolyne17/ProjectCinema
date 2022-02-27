@@ -1,78 +1,168 @@
-.film_div_container
-{
-    background-color: darkslategray;
-    margin:40px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 .h1_listing
 {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#header_ul_listing
-{
-    margin-top:50px;
-    margin-bottom: 0;
-    font-weight: bold;
+.film_super_container{
+    display:flex;
 }
 
-.container_listing
+.film_div_container
 {
-    border:1px solid gray;
-}
-
-.ul_listing
-{
-    display: flex;
-    justify-content: center;
-    padding-left:0;
-}
-
-.li_listing
-{
-    padding:20px;
-    padding-left: 50px;
-    list-style-type: none; 
-    text-align: left;
-    width:25%;
-    font-size: 1.3rem;
+    background-color: #5e5e5e;
+    margin:40px;
+    color :antiquewhite;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-.li_listing span
-{
-    font-weight: bold;
+    width:20%;
     display:block;
+    box-shadow: 5px 2px 4px #0a0a0a;
 }
 
-.listing_btn
-{
-    border:2px solid cornflowerblue;
-    font-size: 1.18rem;
-    font-family: Arial, Helvetica, sans-serif;
-    width:8%;
+.film_div_img{
+    text-align: center;
+}
+
+.film_div_img img{
+    max-height: 250px;
+    max-width: 100%;
+}
+
+.film_div_text{
+    padding:20px;
+    padding-top:0;
+}
+
+.film_div_presentation{
+    padding-top:10px;
+}
+
+.film_div_titre{
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.film_div_synopsis{
+    font-size: 0.83rem;
+    line-height: 2.5ch;
+}
+
+.film_div_grd{
+    padding-top:20px;
+    display:flex;
+    font-size: 0.65rem;
+    color :#c1c1c1;
+}
+
+.film_div_grd p{
+    margin:auto;
+}
+
+.film_div_a_info{ 
+    text-decoration: none;
+}
+
+.film_div_info{
+    padding-top:10px;
+    padding-bottom: 0;
+
+}
+
+.film_div_info p{
+    color:#d8bf00;
+    font-weight: bold;
+    
+}
+
+.film_div_info p:hover{
+    color:#c1c1c1;
+    font-weight: bolder;
+    
+}
+
+
+
+/* -------------------------- SEANCE --------------------- */
+
+.seance_div_titre{
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+.seance_date{
+    font-size: 1.3rem;
+}
+
+.seance_div_grd{
+    padding-top:20px;
+    display:flex;
+    font-size: 1.15rem;
+    color :#c1c1c1;
+}
+
+.seance_div_grd p{
+    margin:auto;
+}
+
+.admin_btn_container{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration:none;
-    color:cornflowerblue;
-    margin:5px;
+    margin : 10px auto 30px auto;
 }
 
-.listing_btn:hover
+.admin_btn_container div,a{
+    margin:auto;
+    text-decoration: none;
+}
+
+.seance_update_btn{
+    color : #5e5e5e;
+    border:1px solid #d8bf00;
+    background-color: #d8bf00;
+    padding:8px;
+    font-size: 1.3rem;
+}
+
+.seance_delete_btn{
+    color : #5e5e5e;
+    border:1px solid #d8bf00;
+    background-color: #d8bf00;
+    padding:8px;
+    font-size: 1.3rem;
+}
+
+.seance_delete_btn:hover{
+    background-color: #5e5e5e;
+    border: 1px solid #d8bf00;
+    color:#d8bf00;
+}
+
+.seance_update_btn:hover{
+    background-color: #5e5e5e;
+    border: 1px solid #d8bf00;
+    color:#d8bf00;    
+}
+
+.btn_admin_container
 {
-    border:2px solid black;
-    color:black;
+    margin:auto;
+    margin-top: 75px;
+    width:35%;
+    text-align: center;
+}
+
+.btn_admin{
+    color : #232323;
+    border:1px solid #d8bf00;
+    background-color: #d8bf00;
+    padding:20px;
+    font-size: 2.5rem;
+    margin-top:40px;
+}
+
+.btn_admin:hover{
+    background-color: #232323;
+    border: 3px solid #d8bf00;
+    color:#d8bf00;  
 }

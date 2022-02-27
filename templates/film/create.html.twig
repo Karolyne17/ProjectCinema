@@ -17,6 +17,9 @@
     {{ form_row(form.title, {'label': 'Titre'})}}
 </div>
 <div class="create_input">
+    {{ form_row(form.synopsis, {'label': 'Synopsis'})}}
+</div>
+<div class="create_input">
     {{ form_row(form.image, {'label': 'Image'})}}
 </div>
 <div class="create_input">
@@ -29,7 +32,7 @@
     {{ form_row(form.duree, {'label': 'Durée en minutes'})}}
 </div>
 <div class="create_input">
-    {{ form_row(form.status, {'label': 'Status'})}}
+    {{ form_row(form.status, {'label': 'Statut'})}}
 </div>
 <div class="create_btn">
     {% if (isEditor) %}

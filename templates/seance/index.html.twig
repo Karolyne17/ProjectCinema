@@ -5,35 +5,35 @@
 {% block body %}
     <h1 class="h1_listing">Nos Séances</h1>
 
-    <table class="table">
-        <thead>
-            <tr id="header_ul_listing" class="ul_listing">
-                <th class="li_listing">Film</th>
-                <th class="li_listing">Date et Heure</th>
-                <th class="li_listing">Version</th>
-                <th class="li_listing">Salle</th>
-                <th class="li_listing">Edition</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for seance in seances %}
-            <tr id="header_ul_listing" class="ul_listing">
-                <td class="li_listing">{{ seance.getFilm().title}}</td>
-                <td class="li_listing">{{ seance.dateDebut ? seance.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td class="li_listing">{{ seance.lang }}</td>
-                <td class="li_listing">{{ seance.getSalle().numero}}</td>
-                <td >
-                    <a href="{{ path('seance_show', {'id': seance.id}) }}">Detail</a>
-                    <a href="{{ path('seance_edit', {'id': seance.id}) }}">Editer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('seance_new') }}">Create new</a>
+
+
+<div class="film_super_container">
+        {% for seance in seances %}
+
+        <div class="film_div_container">
+            <div class="film_div_text">
+                <div class="film_div_presentation">
+                    <p class="seance_div_titre">{{ seance.getFilm().title }}</p>
+                    <a class="film_div_a_info" href="{{ path('filmDetail', { 'id': seance.getFilm().id} ) }}">
+                        <div class="film_div_info">
+                            <p>Détail du film</p>
+                        </div>
+                    </a>
+                    <p class="seance_date">Début à {{ seance.dateDebut ? seance.dateDebut|date('H:i d-m-Y') : ''  }}</p>
+                    <div class="seance_div_grd">
+                        <p class="film_p_grd">{{ seance.lang }}</p>
+                        <p class="film_p_grd">Salle {{ seance.getSalle().numero }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="admin_btn_container">
+                <a href="{{ path('seance_edit', {'id': seance.id}) }}"><div class="seance_update_btn">Modifier</div></a>
+                <div>{{ include('seance/_delete_form.html.twig') }}</div>
+            </div>
+        </div>
+        
+        {% endfor %}
+    </div>
+
 {% endblock %}

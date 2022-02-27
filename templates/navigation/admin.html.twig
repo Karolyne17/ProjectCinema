@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block tittle %}Films{% endblock %}
+
+{% block body %}
+
+<h1 class="h1_listing"> Que voulez-vous faire ? </h1>
+
+<div class="btn_admin_container">
+    <a href="{{ path ('filmCreate') }}"><div class="btn_admin">Ajouter un film</div></a>
+    <a href="{{ path ('seance_new') }}"><div class="btn_admin">Ajouter une séance</div></a>
+    <a href="{{ path ('salle_new') }}"><div class="btn_admin">Ajouter une salle</div></a>
+</div>
+
+    {% endblock %}

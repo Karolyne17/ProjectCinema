@@ -6,6 +6,54 @@
 
 <h1 class="h1_listing"> Détail Du Film {{ film.title }} </h1>
 
+
+<div class="film_super_container">
+
+        <div class="detail_film_div_container">
+            <div class="film_div_img">
+                <img src="uploads\images\{{film.image}}" alt="Affiche Film">
+            </div>
+            <div class="film_div_text">
+                <div class="film_div_presentation">
+                    <p class="detail_film_div_titre">Synopsis</p>
+                    <div class="detail_film_div_synopsis">
+                    {{ film.synopsis}}
+                    </div>
+                    <div class="detail_film_div_grd">
+                        <p class="film_p_grd">Genre : {{ film.genre }}</p>
+                        <p class="film_p_grd">Réalisateur : {{ film.realisateur }}</p>
+                        <p class="film_p_grd">Durée :{{ film.duree }} Minutes</p>
+                    </div>
+                </div>
+                <a class="film_div_a_info" href="{{ path('filmDetail', { 'id': film.id} ) }}">
+                    <div class="film_div_info">
+                        <p>Plus d'informations</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class="detail_container">
     <div>
       <span>Titre du film</span> {{ film.title }}
@@ -17,9 +65,9 @@
       <span>Genre du film</span> {{ film.genre }}
     </div>
 
-    <div class="detail_btn">
-        <a href="{{ path('filmUpdate', { 'id': film.id} ) }}">Editer</a>
-        <a href="{{ path('filmDelete', { 'id': film.id} ) }}">Supprimer</a>
+    <div class="btn_admin_container">
+        <a href="{{ path('filmUpdate', { 'id': film.id} ) }}"><div class="btn_admin">Editer</div></a>
+        <a href="{{ path('filmDelete', { 'id': film.id} ) }}"><div class="btn_admin">Supprimer</div></a>
     </div>
   </div>
     

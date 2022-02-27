@@ -1,3 +1,85 @@
+.detail_film_div_container
+{
+    background-color: #5e5e5e;
+    margin:40px;
+    color :antiquewhite;
+    font-family: Arial, Helvetica, sans-serif;
+    width:40%;
+    display:block;
+    box-shadow: 5px 2px 4px #0a0a0a;
+}
+
+.detail_film_div_titre{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.detail_film_div_synopsis{
+    font-size: 1.25rem;
+    line-height: 2.5ch;
+}
+
+.detail_film_div_grd{
+    padding-top:20px;
+    font-size: 1.1rem;
+    color :#c1c1c1;
+}
+
+.detail_film_div_grd p{
+    margin:auto;
+    line-height: 3.5ch;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .detail_container
 {
     text-align: center;

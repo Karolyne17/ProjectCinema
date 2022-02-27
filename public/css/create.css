@@ -17,6 +17,34 @@
 {
     width : 25%;
     height: 30px;
+    margin-top:10px;
+}
+
+.create_input textarea
+{
+    width : 25%;
+    height: 350px;
+    margin-top:10px;
+}
+
+.create_input select
+{
+    width : 25%;
+    height: 30px;
+    margin-top:10px;
+}
+
+.select_create select{
+    width : 10%;
+    height: 40px;
+
+}
+
+#film_create_status
+{
+    width : 25%;
+    height: 30px;
+    margin-top:10px;
 }
 
 .create_input label
@@ -29,26 +57,44 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
+.create_btn div{
+    width:100%;
 }
 
 
 .create_btn button
 {
-    border:2px solid cornflowerblue;
-    font-size: 1.3rem;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration:none;
-    color:cornflowerblue;
-    margin:5px;
-    background-color: white;
-    padding:15px;
+    color : #232323;
+    border:1px solid #d8bf00;
+    background-color: #d8bf00;
+    padding:8px;
+    font-size: 1.8rem;
+    width:25%;
 }
 
 .create_btn button:hover
 {
-    border:2px solid black;
-    color:black;
+    background-color: #232323;
+    border: 1px solid #d8bf00;
+    color:#d8bf00; 
+}
+
+.btn_create{
+    color : #232323;
+    border:1px solid #d8bf00;
+    background-color: #d8bf00;
+    padding:8px;
+    font-size: 1.8rem;
+    width:25%;
+    margin:auto;
+}
+
+.btn_create:hover{
+    background-color: #232323;
+    border: 1px solid #d8bf00;
+    color:#d8bf00; 
 }
